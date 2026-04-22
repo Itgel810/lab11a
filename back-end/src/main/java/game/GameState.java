@@ -5,29 +5,32 @@ import java.util.Arrays;
 public class GameState {
 
     private final Cell[] cells;
+    private final String instructions;  
 
-    private GameState(Cell[] cells) {
+    private GameState(Cell[] cells, String instructions) {
         this.cells = cells;
+        this.instructions = instructions;  
     }
 
     public static GameState forGame(Game game) {
         Cell[] cells = getCells(game);
-        return new GameState(cells);
+        String instructions = getInstructions(game);  
+        return new GameState(cells, instructions);
     }
 
-    public Cell[] getCells() {
-        return this.cells;
+    
+    private static String getInstructions(Game game) {
+        Player winner = game.getWinner();
+        if (winner == Player.PLAYER0) return "X яллаа!";
+        if (winner == Player.PLAYER1) return "O яллаа!";
+        return "Player " + (game.getPlayer() == Player.PLAYER0 ? "X" : "O") + "-ийн ээлж";
     }
 
-    /**
-     * toString() of GameState will return the string representing
-     * the GameState in JSON format.
-     */
     @Override
     public String toString() {
         return """
-                { "cells": %s}
-                """.formatted(Arrays.toString(this.cells));
+                { "cells": %s, "instructions": "%s"}
+                """.formatted(Arrays.toString(this.cells), this.instructions);
     }
 
     private static Cell[] getCells(Game game) {
@@ -43,7 +46,7 @@ public class GameState {
                 else if (player == Player.PLAYER1)
                     text = "O";
                 else if (player == null) {
-                    playable = true;
+                    playable = game.getWinner() == null;  
                 }
                 cells[3 * y + x] = new Cell(x, y, text, playable);
             }
@@ -65,21 +68,10 @@ class Cell {
         this.playable = playable;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public String getText() {
-        return this.text;
-    }
-
-    public boolean isPlayable() {
-        return this.playable;
-    }
+    public int getX() { return x; }
+    public int getY() { return y; }
+    public String getText() { return this.text; }
+    public boolean isPlayable() { return this.playable; }
 
     @Override
     public String toString() {

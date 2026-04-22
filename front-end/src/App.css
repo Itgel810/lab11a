@@ -1,47 +1,109 @@
-#board {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  background-color: #2196F3;
-  padding: 10px
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.cell {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  font-size: 30px;
-  height: 25vmin;
-  text-align: center;
+body {
+  background: #1a1a2e;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
-#bottombar {
-  height: 5vh;
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+}
+
+h1 {
+  color: #e94560;
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
 }
 
 #instructions {
-  height: 5vh;
-  background-color: white;
-  padding: 0px;
-  margin: 0px;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: white;
+  background: #16213e;
+  padding: 16px 60px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  border: 2px solid #e94560;
+  letter-spacing: 1px;
+}
+
+#board {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 10px;
+  background: #0f3460;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(233, 69, 96, 0.3);
+}
+
+.cell {
+  background: #16213e;
+  border: 2px solid #0f3460;
+  border-radius: 10px;
+  font-size: 4rem;
+  font-weight: bold;
+  height: 160px;
+  width: 160px;
   text-align: center;
-  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.playable {
+  background: #1a1a2e;
+  cursor: pointer;
+}
+
+.playable:hover {
+  background: #0f3460;
+  transform: scale(1.05);
+}
+
+#bottombar {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
 }
 
 #bottombar button {
-  width: 50%;
-  /* height: 100%; */
-  margin: 0;
-  padding: 0;
-  position: relative;
-  float: left;
-  font-size: 2vw
+  padding: 16px 50px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  letter-spacing: 1px;
 }
 
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+#bottombar button:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
 }
 
-.playable { background-color: red;}
+#bottombar button:first-child {
+  background: #e94560;
+  color: white;
+}
+
+#bottombar button:last-child {
+  background: #f39c12;
+  color: white;
+}
